@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us - Bharat Theme</title>
+  <title>Contact Us - Bharat Ecomm Solutions</title>
   <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
@@ -23,12 +28,23 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      transition: background 0.3s;
     }
+
+    header.scrolled {
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(5px);
+    }
+
     header .logo {
       font-size: 22px;
       font-weight: bold;
       color: #ffcc00;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+
     header nav a {
       color: #fff;
       margin-left: 25px;
@@ -36,6 +52,7 @@
       font-size: 15px;
       transition: 0.3s;
     }
+
     header nav a:hover {
       color: #ffcc00;
     }
@@ -45,24 +62,31 @@
       background: linear-gradient(to right, #fff7e6, #fff);
       text-align: center;
       padding: 80px 20px;
+      animation: fadeIn 1.2s ease-in-out;
     }
+
     .hero h1 {
       font-size: 36px;
       margin-bottom: 10px;
+      animation: slideUp 1s ease-in-out;
     }
+
     .hero p {
       font-size: 16px;
       color: #555;
+      animation: slideUp 1.2s ease-in-out;
     }
 
-    /* Contact Form */
+    /* Contact Section */
     .contact-section {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       padding: 60px 40px;
       gap: 40px;
+      animation: fadeIn 1.2s ease-in-out;
     }
+
     .contact-form {
       flex: 1;
       min-width: 320px;
@@ -71,11 +95,19 @@
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
     }
+
+    .contact-form:hover {
+      transform: translateY(-4px);
+    }
+
     .contact-form h2 {
       margin-bottom: 20px;
+      font-size: 22px;
     }
-    .contact-form input, 
+
+    .contact-form input,
     .contact-form textarea {
       width: 100%;
       padding: 12px;
@@ -83,7 +115,16 @@
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 15px;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #ffcc00;
+      box-shadow: 0 0 0 2px rgba(255,204,0,0.3);
+      outline: none;
+    }
+
     .contact-form button {
       background: #ffcc00;
       border: none;
@@ -94,6 +135,7 @@
       cursor: pointer;
       transition: 0.3s;
     }
+
     .contact-form button:hover {
       background: #111;
       color: #ffcc00;
@@ -105,16 +147,26 @@
       min-width: 280px;
       max-width: 400px;
     }
+
     .contact-info h2 {
       margin-bottom: 20px;
+      font-size: 22px;
     }
+
     .info-box {
       background: #fff;
       padding: 20px;
       margin-bottom: 15px;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
+
+    .info-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
     .info-box strong {
       display: block;
       margin-bottom: 5px;
@@ -131,17 +183,29 @@
       font-size: 14px;
     }
 
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
     @media(max-width:768px){
       .hero h1 { font-size: 28px; }
-      .contact-section { flex-direction: column; align-items: center; }
+      .contact-section { flex-direction: column; align-items: center; padding: 40px 20px; }
     }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-  <header>
-    <div class="logo">🇮🇳 Bharat Theme</div>
+  <header id="main-header">
+    <div class="logo">🇮🇳 Bharat Ecomm Solutions</div>
     <nav>
       <a href="/home">Home</a>
       <a href="https://bharat-ecomm-solutions.gitbook.io/indian-theme-docs/" target="_blank">Documentation</a>
@@ -152,7 +216,7 @@
   <!-- Hero -->
   <section class="hero">
     <h1>Contact Us</h1>
-    <p>We’d love to hear from you! Get in touch with our team.</p>
+    <p>We’d love to hear from you! Reach out to our team anytime.</p>
   </section>
 
   <!-- Contact Section -->
@@ -161,37 +225,100 @@
     <!-- Form -->
     <div class="contact-form">
       <h2>Send us a Message</h2>
-      <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <input type="text" placeholder="Subject">
-        <textarea rows="6" placeholder="Your Message" required></textarea>
+      <form id="contactForm">
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="url" name="store_url" placeholder="Store URL (e.g. http://www.storename.myshopify.com)" required>
+        <input type="text" name="theme_name" placeholder="Theme Name (if applicable)">
+        <input type="text" name="subject" placeholder="Subject">
+        <textarea name="description" rows="6" placeholder="Describe your issue or request" required></textarea>
+        <input type="file" name="attachment" id="attachment" accept="image/*">
         <button type="submit">Send Message</button>
       </form>
+
     </div>
 
-    <!-- Info -->
-    <div class="contact-info">
-      <h2>Our Contact Info</h2>
-      <div class="info-box">
-        <strong>Email</strong>
-        bharatthemes@gmail.com
-      </div>
-      <div class="info-box">
-        <strong>Phone</strong>
-        +91 78793 86266
-      </div>
-      <div class="info-box">
-        <strong>Address</strong>
-        Bharat Themes Studio, Indore, India
-      </div>
+
+  <!-- Info -->
+  <div class="contact-info">
+    <h2>Our Contact Info</h2>
+    <div class="info-box">
+      <strong>Email</strong>
+      bharatthemes@gmail.com
     </div>
-  </section>
+    <div class="info-box">
+      <strong>Phone</strong>
+      +91 78793 86266
+    </div>
+    <div class="info-box">
+      <strong>Address</strong>
+      Bharat Ecomm Solutions, Indore, India
+    </div>
+  </div>
+</section>
 
   <!-- Footer -->
   <footer>
-    © 2025 Bharat Theme. All Rights Reserved. | Made with ❤️ in India
+    © 2025 Bharat Ecomm Solutions. All Rights Reserved. | Made with ❤️ in India
   </footer>
+<!-- Load EmailJS SDK at the end of body -->
+<!-- Load EmailJS SDK at the end of body -->
+<script type="text/javascript" src="https://cdn.emailjs.com/sdk/3.11/email.min.js"></script>
+<script type="text/javascript">
+  window.addEventListener("DOMContentLoaded", function() {
+    // Initialize EmailJS
+    emailjs.init("HsSvZ9RT0_c5hXt6Q");
+
+    // Header scroll effect
+    const header = document.getElementById("main-header");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    // Form submission
+    const form = document.getElementById("contactForm");
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const fileInput = document.getElementById("attachment");
+      const reader = new FileReader();
+
+      if (fileInput.files.length > 0) {
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        sendEmail(null);
+      }
+
+      reader.onload = function() {
+        sendEmail(reader.result);
+      };
+
+      function sendEmail(fileBase64) {
+        const templateParams = {
+          first_name: form.first_name.value,
+          last_name: form.last_name.value,
+          email: form.email.value,
+          store_url: form.store_url.value,
+          theme_name: form.theme_name.value,
+          subject: form.subject.value,
+          description: form.description.value,
+          attachment: fileBase64
+        };
+
+        emailjs.send("service_9ohmo2l", "template_u5ayuab", templateParams)
+          .then(function(response) {
+            alert("Thank you! Your message has been sent.");
+            form.reset();
+          }, function(error) {
+            alert("Oops! Something went wrong. Please try again.");
+            console.error(error);
+          });
+      }
+    });
+  });
+</script>
+
+
 
 </body>
 </html>
